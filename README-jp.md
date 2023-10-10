@@ -8,7 +8,7 @@
 </div>
 </br>
 
-WebRTC を利用したチャット，ビデオ通話，ゲームの試験アプリ
+WebRTC を利用したチャット，ビデオ通話，ゲームの試験アプリ．
 
 ## 機能
 
@@ -25,7 +25,7 @@ https://www.youtube.com/watch?v=ON8khxFI73k
 
 ## 実行方法
 
-リポジトリをクローンしてください
+リポジトリをクローンしてください．
 
 ```
 $ git clone https://github.com/whtsht/webrtc-playground
