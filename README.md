@@ -4,7 +4,7 @@
 <div align="center">
     English
     &nbsp;&nbsp;| &nbsp;&nbsp;
-    <a href="https://github.com/whtsth/webrtc-playground/blob/main/README-jp.md">日本語</a>
+    <a href="https://github.com/whtsht/webrtc-playground/blob/main/README-jp.md">日本語</a>
 </div>
 </br>
 
