@@ -8,7 +8,7 @@
 </div>
 </br>
 
-Test the app for chat, video calls, and games using WebRTC.
+Experimental app for chatting, video calling, and games using WebRTC.
 
 ## Functions
 
