@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Chat from "./lib/Chat.svelte";
+    import Chat from "./lib/Chat/Main.svelte";
     import Pong from "./lib/Pong.svelte";
     import SideBar from "./lib/SideBar.svelte";
     import Snackbar from "./lib/Snackbar.svelte";
