@@ -31,7 +31,7 @@
     async function onSwitch() {
         if ($display) {
             $localStream = await navigator.mediaDevices.getUserMedia({
-                audio: false,
+                audio: true,
                 video: true,
             });
             if (video) {
@@ -79,10 +79,10 @@
                 bind:this={video}
             />
             {#each $remoteStreams as [_, stream]}
+                <!-- svelte-ignore a11y-media-has-caption -->
                 <video
                     width="400px"
                     height="300px"
-                    muted
                     autoplay
                     use:srcObject={stream}
                 />
