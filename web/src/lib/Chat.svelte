@@ -64,35 +64,36 @@
 <div class="chat">
     <div class="message-box">
         {#each $chatMessages as chat}
-            {#if chat.type === "chat"}
-                <div in:fly={{ y: 100, duration: 500 }}>
+            <div in:fly={{ y: 100, duration: 500 }}>
+                {#if chat.type === "chat"}
                     <SpeechBubble name={chat.user}>
                         <p>{chat.message}</p>
                     </SpeechBubble>
-                </div>
-            {:else if chat.type === "videoCall"}
-                <SpeechBubble name={chat.user}>
-                    <p>Let's start video call!</p>
-                    {#if chat.user !== $userName}
-                        <button
-                            style="margin-bottom: 20px;"
-                            on:click={() => getMembers(chat.user)}>Join</button
-                        >
-                    {/if}
-                </SpeechBubble>
-            {:else}
-                <SpeechBubble name={chat.user}>
-                    <p>Let's start pong game!</p>
-                    {#if chat.user !== $userName}
-                        <button
-                            style="margin-bottom: 20px;"
-                            on:click={() => {
-                                joinGame(chat.user);
-                            }}>Join</button
-                        >
-                    {/if}
-                </SpeechBubble>
-            {/if}
+                {:else if chat.type === "videoCall"}
+                    <SpeechBubble name={chat.user}>
+                        <p>Let's start video call!</p>
+                        {#if chat.user !== $userName}
+                            <button
+                                style="margin-bottom: 20px;"
+                                on:click={() => getMembers(chat.user)}
+                                >Join</button
+                            >
+                        {/if}
+                    </SpeechBubble>
+                {:else}
+                    <SpeechBubble name={chat.user}>
+                        <p>Let's start pong game!</p>
+                        {#if chat.user !== $userName}
+                            <button
+                                style="margin-bottom: 20px;"
+                                on:click={() => {
+                                    joinGame(chat.user);
+                                }}>Join</button
+                            >
+                        {/if}
+                    </SpeechBubble>
+                {/if}
+            </div>
         {/each}
     </div>
 
