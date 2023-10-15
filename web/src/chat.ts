@@ -182,7 +182,7 @@ socket.on("connect", () => {
 
     socket.on("offer", async (to: string, from: string, sdp: string) => {
         if (to !== socket.id) return;
-        console.log(`[offer] to: ${to}, from: ${from}, sdp: ${sdp}`);
+        console.log(`[chat offer] to: ${to}, from: ${from}, sdp: ${sdp}`);
         const peer = getPeer(from);
 
         await setOffer(peer, JSON.parse(sdp));
@@ -191,13 +191,16 @@ socket.on("connect", () => {
 
     socket.on("answer", async (to: string, from: string, sdp: string) => {
         if (to !== socket.id) return;
-        console.log(`[answer] to: ${to}, from: ${from}, sdp: ${sdp}`);
+        console.log(`[chat answer] to: ${to}, from: ${from}, sdp: ${sdp}`);
         const peer = getPeer(from);
         await setAnswer(peer, JSON.parse(sdp));
     });
 
     socket.on("candidate", (to: string, from: string, candidate: string) => {
         if (to !== socket.id) return;
+        console.log(
+            `[chat candidate] to: ${to}, from: ${from}, candidate: ${candidate}`
+        );
         getPeer(from).addIceCandidate(JSON.parse(candidate));
     });
 });

@@ -27,14 +27,14 @@ export function createNegotiationChannel(peer: RTCPeerConnection) {
     negotiateChannel.onmessage = async (ev) => {
         const negotiate: Negotiate = JSON.parse(ev.data);
         if (negotiate.type === "startNegotiate") {
-            console.log(`[startNegotiate] from: ${negotiate.from}`);
+            console.log(`[video startNegotiate] from: ${negotiate.from}`);
             const connect = connects.get(negotiate.from)!;
             const peer = newPeerConnection(negotiate.from);
             connect.videoCallConnection = peer;
             return;
         }
         if (negotiate.type === "getMembers") {
-            console.log(`[getMembers] from: ${negotiate.from}`);
+            console.log(`[video getMembers] from: ${negotiate.from}`);
             sendNegotiate(negotiate.from, {
                 type: "members",
                 from: get(userName),
@@ -44,7 +44,7 @@ export function createNegotiationChannel(peer: RTCPeerConnection) {
         }
         if (negotiate.type === "members") {
             console.log(
-                `[members] from: ${negotiate.from}, members: ${negotiate.members}`
+                `[video members] from: ${negotiate.from}, members: ${negotiate.members}`
             );
             if (negotiate.members.length === 0) {
                 open("video call is finished");
@@ -57,7 +57,7 @@ export function createNegotiationChannel(peer: RTCPeerConnection) {
         }
         if (negotiate.type === "offer") {
             console.log(
-                `[offser] from: ${negotiate.from}, sdp: ${negotiate.sdp}`
+                `[video offser] from: ${negotiate.from}, sdp: ${negotiate.sdp}`
             );
             const peer = getPeer(negotiate.from);
             await setOffer(peer, JSON.parse(negotiate.sdp));
@@ -66,7 +66,7 @@ export function createNegotiationChannel(peer: RTCPeerConnection) {
         }
         if (negotiate.type === "answer") {
             console.log(
-                `[answer] from: ${negotiate.from}, sdp: ${negotiate.sdp}`
+                `[video answer] from: ${negotiate.from}, sdp: ${negotiate.sdp}`
             );
 
             const peer = getPeer(negotiate.from);
