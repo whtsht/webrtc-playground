@@ -1,7 +1,7 @@
 import { get } from "svelte/store";
 import { userName } from "./chat";
 
-interface Peer {
+interface PeerConnection {
     chatConnection: RTCPeerConnection;
     videoCallConnection: RTCPeerConnection | null;
     chatChannel: RTCDataChannel;
@@ -16,9 +16,7 @@ type SendSdp = (
     from: string
 ) => void;
 
-export const connects: Map<string, Peer> = new Map();
-
-export function resetConnects() {}
+export const connects: Map<string, PeerConnection> = new Map();
 
 export async function sendOffer(
     newPeerConnection: (to: string) => RTCPeerConnection,

@@ -19,16 +19,13 @@
 </div>
 
 <style>
-    p {
+    p.user-name {
+        font-size: 13px;
         color: #fff;
         word-wrap: break-word;
         max-width: 200px;
         text-align: start;
         white-space: pre;
-    }
-
-    p.user-name {
-        font-size: 13px;
     }
 
     .outer {

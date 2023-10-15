@@ -27,8 +27,8 @@
         $display = false;
     }
 
-    $: $display, onClick();
-    async function onClick() {
+    $: $display, onSwitch();
+    async function onSwitch() {
         if ($display) {
             $localStream = await navigator.mediaDevices.getUserMedia({
                 audio: false,
