@@ -1,15 +1,15 @@
-# WebRTC Playground Signaling Server
+# WebRTC Playground シグナリングサーバー
 
-## Getting Started
+## 実行方法
 
-using yarn
+yarnを使う場合
 
 ```
 $ yarn
 $ yarn run dev
 ```
 
-using npm
+npmを使う場合
 
 ```
 $ npm install

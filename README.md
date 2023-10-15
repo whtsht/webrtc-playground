@@ -2,62 +2,62 @@
 
 </br>
 <div align="center">
-    English
-    &nbsp;&nbsp;| &nbsp;&nbsp;
-    <a href="https://github.com/whtsht/webrtc-playground/blob/main/README-jp.md">日本語</a>
+    <a href="https://github.com/whtsht/webrtc-playground/blob/main/README.md">English</a>
+    &nbsp;&nbsp;| &nbsp;&nbsp;
+    日本語
 </div>
 </br>
 
-Experimental app for chatting, video calling, and games using WebRTC.
+WebRTC を利用したチャット，ビデオ通話，ゲームの試験アプリ．
 
-## Functions
+## 機能
 
-- Real-time chat
-- Video call
-- Pong game
-- Connect up to 4 people
+- リアルタイムのチャット
+- ビデオ通話
+- Pong ゲーム
+- 最大 4 人まで接続可能
 
-## Demo
+## デモ
 
 [![WebRTC Playground Demo Video](https://img.youtube.com/vi/ON8khxFI73k/0.jpg)](https://www.youtube.com/watch?v=ON8khxFI73k)
 
 https://www.youtube.com/watch?v=ON8khxFI73k
 
-## Getting Started
+## 実行方法
 
-Please clone the repository.
+リポジトリをクローンしてください．
 
 ```
 $ git clone https://github.com/whtsht/webrtc-playground
 $ cd webrtc-playground
 ```
 
-### Start the web server
+### ウェブサーバーを起動
 
 ```
 $ cd web
-When using yarn
+yarn を使う場合
 $ yarn
 $ yarn run dev
-When using npm
+npm を使う場合
 $ npm install
 $ npm run dev
 ```
 
-### Start the signaling server
+### シグナリングサーバーの起動
 
 ```
 $ cd ap
-When using yarn
+yarn を使う場合
 $ yarn
 $ yarn run dev
-When using npm
+npm を使う場合
 $ npm install
 $ npm run dev
 ```
 
-The app will start at http://localhost:5173.
+http://localhost:5173 でアプリが起動します．
 
-## License
+## ライセンス
 
-It is released under the MIT license. Please feel free to modify the code and play around with it.
+MIT ライセンスで公開しています．自由にコードを修正して遊んでみてください．
