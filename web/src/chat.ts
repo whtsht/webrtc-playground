@@ -1,6 +1,5 @@
 import { connect } from "socket.io-client";
 import { get, writable, type Writable } from "svelte/store";
-import { createNegotiationChannel } from "./videoCall";
 import { connects, sendAnswer, sendOffer, setAnswer, setOffer } from "./webrtc";
 
 export const roomName: Writable<null | string> = writable(null);
@@ -9,9 +8,7 @@ export const userName = writable("");
 
 export const chatMembers: Writable<string[]> = writable([]);
 
-export type ChatMessage =
-    | { user: string; type: "chat"; message: string }
-    | { user: string; type: "videoCall" };
+export type ChatMessage = { user: string; type: "chat"; message: string };
 
 export const chatMessages: Writable<ChatMessage[]> = writable([]);
 
@@ -86,27 +83,11 @@ function newPeerConnection(to: string) {
     };
 
     peer.ondatachannel = (ev) => {
-        const {
+        const { chatConnection } = connects.get(to)!;
+        connects.set(to, {
             chatConnection,
-            videoCallConnection,
-            chatChannel,
-            negotiateChannel,
-        } = connects.get(to)!;
-        if (ev.channel.label == "chat") {
-            connects.set(to, {
-                chatConnection,
-                videoCallConnection,
-                chatChannel: ev.channel,
-                negotiateChannel,
-            });
-        } else {
-            connects.set(to, {
-                chatConnection,
-                videoCallConnection,
-                chatChannel,
-                negotiateChannel: ev.channel,
-            });
-        }
+            chatChannel: ev.channel,
+        });
     };
 
     const chatChannel = peer.createDataChannel("chat");
@@ -118,8 +99,6 @@ function newPeerConnection(to: string) {
         });
     };
 
-    const negotiateChannel = createNegotiationChannel(peer);
-
     peer.onicecandidate = (ev) => {
         if (ev.candidate) {
             console.log(ev.candidate);
@@ -129,9 +108,7 @@ function newPeerConnection(to: string) {
 
     connects.set(to, {
         chatConnection: peer,
-        videoCallConnection: null,
         chatChannel,
-        negotiateChannel,
     });
 
     return peer;

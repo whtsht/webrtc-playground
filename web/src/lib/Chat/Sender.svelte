@@ -1,30 +1,8 @@
 <script lang="ts">
     import { chatMessages, roomName, sendMessage, userName } from "../../chat";
-    import {
-        joinVideoCall,
-        videoCallMembers,
-        display as diplayVideoCall,
-    } from "../../videoCall";
     import Send from "svelte-material-icons/Send.svelte";
-    import Phone from "svelte-material-icons/Phone.svelte";
 
     let value = "";
-
-    function startVideoCall() {
-        if ($roomName) {
-            chatMessages.update((messages) => [
-                ...messages,
-                { user: $userName, type: "videoCall" },
-            ]);
-            sendMessage({
-                type: "videoCall",
-                user: $userName,
-            });
-            $joinVideoCall = false;
-            $diplayVideoCall = true;
-            $videoCallMembers = [...$videoCallMembers, $userName];
-        }
-    }
 
     function sendChatMessage() {
         if (value !== "" && $roomName && $userName) {
@@ -49,9 +27,6 @@
     <textarea bind:value on:keydown={handleKeyboard} />
     <button on:click={sendChatMessage}>
         <Send size="24px" viewBox="0 0 24 20" />
-    </button>
-    <button on:click={startVideoCall}>
-        <Phone size="24px" viewBox="0 0 24 20" />
     </button>
 </div>
 

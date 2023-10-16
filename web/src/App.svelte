@@ -2,7 +2,6 @@
     import Chat from "./lib/Chat/Main.svelte";
     import SideBar from "./lib/SideBar.svelte";
     import Snackbar from "./lib/Snackbar.svelte";
-    import VideoCall from "./lib/VideoCall.svelte";
     import LeaveRoom from "./lib/LeaveRoom.svelte";
     import NewRoom from "./lib/NewRoom.svelte";
 
@@ -13,7 +12,6 @@
 <main>
     <SideBar bind:leaveRoom bind:newRoom />
     <Chat />
-    <VideoCall />
     <Snackbar />
 
     <LeaveRoom bind:this={leaveRoom} />

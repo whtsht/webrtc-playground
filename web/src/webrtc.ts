@@ -3,9 +3,7 @@ import { userName } from "./chat";
 
 interface PeerConnection {
     chatConnection: RTCPeerConnection;
-    videoCallConnection: RTCPeerConnection | null;
     chatChannel: RTCDataChannel;
-    negotiateChannel: RTCDataChannel;
 }
 
 type SendSdp = (

@@ -19,7 +19,6 @@
         $chatMessages = [];
         connects.forEach((connect) => {
             connect.chatConnection.close();
-            connect.videoCallConnection?.close();
         });
         close();
     }
