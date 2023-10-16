@@ -1,13 +1,5 @@
 # WebRTC Playground
 
-</br>
-<div align="center">
-    <a href="https://github.com/whtsht/webrtc-playground/blob/main/README.md">English</a>
-    &nbsp;&nbsp;| &nbsp;&nbsp;
-    日本語
-</div>
-</br>
-
 WebRTC を利用したチャット，ビデオ通話，ゲームの試験アプリ．
 
 ## 機能
@@ -60,4 +52,4 @@ http://localhost:5173 でアプリが起動します．
 
 ## ライセンス
 
-MIT ライセンスで公開しています．自由にコードを修正して遊んでみてください．
+MIT ライセンスで公開しています．
