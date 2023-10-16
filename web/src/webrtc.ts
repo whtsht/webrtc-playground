@@ -6,7 +6,6 @@ interface PeerConnection {
     videoCallConnection: RTCPeerConnection | null;
     chatChannel: RTCDataChannel;
     negotiateChannel: RTCDataChannel;
-    pongChannel: RTCDataChannel;
 }
 
 type SendSdp = (

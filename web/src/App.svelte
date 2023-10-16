@@ -1,6 +1,5 @@
 <script lang="ts">
     import Chat from "./lib/Chat/Main.svelte";
-    import Pong from "./lib/Pong.svelte";
     import SideBar from "./lib/SideBar.svelte";
     import Snackbar from "./lib/Snackbar.svelte";
     import VideoCall from "./lib/VideoCall.svelte";
@@ -16,7 +15,6 @@
     <Chat />
     <VideoCall />
     <Snackbar />
-    <Pong />
 
     <LeaveRoom bind:this={leaveRoom} />
     <NewRoom bind:this={newRoom} />

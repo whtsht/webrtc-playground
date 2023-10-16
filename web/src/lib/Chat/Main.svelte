@@ -2,7 +2,6 @@
     import { fly } from "svelte/transition";
     import { chatMessages } from "../../chat";
     import VideoCallMessage from "./VideoCallMessage.svelte";
-    import PongMessage from "./PongMessage.svelte";
     import ChatMessage from "./ChatMessage.svelte";
     import Sender from "./Sender.svelte";
 </script>
@@ -13,10 +12,8 @@
             <div in:fly={{ y: 100, duration: 500 }}>
                 {#if chat.type === "chat"}
                     <ChatMessage user={chat.user} message={chat.message} />
-                {:else if chat.type === "videoCall"}
-                    <VideoCallMessage user={chat.user} />
                 {:else}
-                    <PongMessage user={chat.user} />
+                    <VideoCallMessage user={chat.user} />
                 {/if}
             </div>
         {/each}

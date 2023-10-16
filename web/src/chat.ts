@@ -1,7 +1,6 @@
 import { connect } from "socket.io-client";
 import { get, writable, type Writable } from "svelte/store";
 import { createNegotiationChannel } from "./videoCall";
-import { createPongChannel } from "./pong";
 import { connects, sendAnswer, sendOffer, setAnswer, setOffer } from "./webrtc";
 
 export const roomName: Writable<null | string> = writable(null);
@@ -12,8 +11,7 @@ export const chatMembers: Writable<string[]> = writable([]);
 
 export type ChatMessage =
     | { user: string; type: "chat"; message: string }
-    | { user: string; type: "videoCall" }
-    | { user: string; type: "pong" };
+    | { user: string; type: "videoCall" };
 
 export const chatMessages: Writable<ChatMessage[]> = writable([]);
 
@@ -93,7 +91,6 @@ function newPeerConnection(to: string) {
             videoCallConnection,
             chatChannel,
             negotiateChannel,
-            pongChannel,
         } = connects.get(to)!;
         if (ev.channel.label == "chat") {
             connects.set(to, {
@@ -101,23 +98,13 @@ function newPeerConnection(to: string) {
                 videoCallConnection,
                 chatChannel: ev.channel,
                 negotiateChannel,
-                pongChannel,
-            });
-        } else if (ev.channel.label == "negotiate") {
-            connects.set(to, {
-                chatConnection,
-                videoCallConnection,
-                chatChannel,
-                negotiateChannel: ev.channel,
-                pongChannel,
             });
         } else {
             connects.set(to, {
                 chatConnection,
                 videoCallConnection,
                 chatChannel,
-                negotiateChannel,
-                pongChannel: ev.channel,
+                negotiateChannel: ev.channel,
             });
         }
     };
@@ -133,8 +120,6 @@ function newPeerConnection(to: string) {
 
     const negotiateChannel = createNegotiationChannel(peer);
 
-    const pongChannel = createPongChannel(peer);
-
     peer.onicecandidate = (ev) => {
         if (ev.candidate) {
             console.log(ev.candidate);
@@ -147,7 +132,6 @@ function newPeerConnection(to: string) {
         videoCallConnection: null,
         chatChannel,
         negotiateChannel,
-        pongChannel,
     });
 
     return peer;
