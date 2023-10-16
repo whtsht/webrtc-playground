@@ -1,34 +1,7 @@
 <script lang="ts">
-    import { chatMessages, roomName, sendMessage, userName } from "../../chat";
-    import Send from "svelte-material-icons/Send.svelte";
-
-    let value = "";
-
-    function sendChatMessage() {
-        if (value !== "" && $roomName && $userName) {
-            chatMessages.update((messages) => [
-                ...messages,
-                { user: $userName, type: "chat", message: value },
-            ]);
-            sendMessage({ type: "chat", message: value, user: $userName });
-        }
-        value = "";
-    }
-
-    function handleKeyboard(event: KeyboardEvent) {
-        if (event.shiftKey && event.key === "Enter") {
-            event.preventDefault();
-            sendChatMessage();
-        }
-    }
 </script>
 
-<div class="sender">
-    <textarea bind:value on:keydown={handleKeyboard} />
-    <button on:click={sendChatMessage}>
-        <Send size="24px" viewBox="0 0 24 20" />
-    </button>
-</div>
+<div class="sender" />
 
 <style>
     .sender {
@@ -39,23 +12,5 @@
         gap: 10px;
         height: 15%;
         width: 100%;
-    }
-
-    .sender textarea {
-        width: 100%;
-        height: 50px;
-        resize: none;
-    }
-
-    .sender button {
-        height: 50px;
-        border: solid 2px;
-        background-color: #f1f1f1;
-    }
-
-    .sender button:hover {
-        height: 50px;
-        border: solid 2px;
-        background-color: #555;
     }
 </style>

@@ -1,18 +1,9 @@
 <script lang="ts">
-    import { fly } from "svelte/transition";
-    import { chatMessages } from "../../chat";
-    import ChatMessage from "./ChatMessage.svelte";
     import Sender from "./Sender.svelte";
 </script>
 
 <div class="chat">
-    <div class="message-box">
-        {#each $chatMessages as chat}
-            <div in:fly={{ y: 100, duration: 500 }}>
-                <ChatMessage user={chat.user} message={chat.message} />
-            </div>
-        {/each}
-    </div>
+    <div class="message-box" />
     <Sender />
 </div>
 

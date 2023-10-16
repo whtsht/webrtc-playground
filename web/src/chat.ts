@@ -1,6 +1,6 @@
 import { connect } from "socket.io-client";
 import { get, writable, type Writable } from "svelte/store";
-import { connects, sendAnswer, sendOffer, setAnswer, setOffer } from "./webrtc";
+import { connects } from "./webrtc";
 
 export const roomName: Writable<null | string> = writable(null);
 
@@ -19,46 +19,11 @@ let connected = false;
 const timeout = 3000;
 
 export function createOrJoinRoom(name: string) {
-    return new Promise((resolve, reject) => {
-        let timer: null | NodeJS.Timeout = null;
-        if (!connected) {
-            reject("not connected");
-        }
-
-        socket.emit("create or join", name);
-
-        socket.once("full", (room: string) => {
-            if (timer) clearTimeout(timer);
-            reject(`room ${room} is full`);
-        });
-
-        socket.once("created", () => {
-            if (timer) clearTimeout(timer);
-            roomName.set(name);
-            resolve("created");
-        });
-
-        socket.once("joined", async (members: string[]) => {
-            if (timer) clearTimeout(timer);
-            for (const member of members) {
-                await sendOffer(newPeerConnection, member, sendSdp);
-            }
-
-            resolve("joined");
-        });
-
-        timer = setTimeout(() => {
-            reject("timeout waiting for message");
-        }, timeout);
-    });
+    throw new Error("Not implemented");
 }
 
 export function sendMessage(message: ChatMessage) {
-    connects.forEach(({ chatConnection: _, chatChannel }) => {
-        try {
-            chatChannel.send(JSON.stringify(message));
-        } catch (_) {}
-    });
+    throw new Error("Not implemented");
 }
 
 function getPeer(to: string) {
@@ -133,35 +98,4 @@ function sendCandidate(candidate: RTCIceCandidate, to: string, from: string) {
     );
 }
 
-socket.on("connect", () => {
-    connected = true;
-    userName.set(socket.id);
-
-    socket.on("join", async (from: string) => {
-        newPeerConnection(from);
-    });
-
-    socket.on("offer", async (to: string, from: string, sdp: string) => {
-        if (to !== socket.id) return;
-        console.log(`[chat offer] to: ${to}, from: ${from}, sdp: ${sdp}`);
-        const peer = getPeer(from);
-
-        await setOffer(peer, JSON.parse(sdp));
-        await sendAnswer(peer, from, sendSdp);
-    });
-
-    socket.on("answer", async (to: string, from: string, sdp: string) => {
-        if (to !== socket.id) return;
-        console.log(`[chat answer] to: ${to}, from: ${from}, sdp: ${sdp}`);
-        const peer = getPeer(from);
-        await setAnswer(peer, JSON.parse(sdp));
-    });
-
-    socket.on("candidate", (to: string, from: string, candidate: string) => {
-        if (to !== socket.id) return;
-        console.log(
-            `[chat candidate] to: ${to}, from: ${from}, candidate: ${candidate}`
-        );
-        getPeer(from).addIceCandidate(JSON.parse(candidate));
-    });
-});
+socket.on("connect", () => {});
