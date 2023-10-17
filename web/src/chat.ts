@@ -66,7 +66,7 @@ export function sendMessage(message: ChatMessage) {
     });
 }
 
-function getPeer(to: string) {
+function getPeer(to: string): RTCPeerConnection {
     return connects.get(to)!.chatConnection!;
 }
 
