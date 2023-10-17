@@ -26,57 +26,12 @@ export function sendMessage(message: ChatMessage) {
     throw new Error("Not implemented");
 }
 
-function getPeer(to: string) {
-    return connects.get(to)!.chatConnection!;
+function getPeer(to: string): RTCPeerConnection {
+    throw new Error("Not implemented");
 }
 
-function newPeerConnection(to: string) {
-    const peer = new RTCPeerConnection();
-    peer.onconnectionstatechange = (_) => {
-        console.log(`connection state: ${peer.connectionState}`);
-        if (peer.connectionState === "connected") {
-            chatMembers.update((members) => [...members, to]);
-        } else if (
-            peer.connectionState === "disconnected" ||
-            peer.connectionState === "failed" ||
-            peer.connectionState === "closed"
-        ) {
-            chatMembers.update((members) =>
-                members.filter((member) => member !== to)
-            );
-        }
-    };
-
-    peer.ondatachannel = (ev) => {
-        const { chatConnection } = connects.get(to)!;
-        connects.set(to, {
-            chatConnection,
-            chatChannel: ev.channel,
-        });
-    };
-
-    const chatChannel = peer.createDataChannel("chat");
-    chatChannel.onmessage = (ev) => {
-        const message: ChatMessage = JSON.parse(ev.data);
-        console.log(message);
-        chatMessages.update((messages) => {
-            return [...messages, message];
-        });
-    };
-
-    peer.onicecandidate = (ev) => {
-        if (ev.candidate) {
-            console.log(ev.candidate);
-            sendCandidate(ev.candidate, to, socket.id);
-        }
-    };
-
-    connects.set(to, {
-        chatConnection: peer,
-        chatChannel,
-    });
-
-    return peer;
+function newPeerConnection(to: string): RTCPeerConnection {
+    throw new Error("Not implemented");
 }
 
 function sendSdp(
@@ -85,17 +40,11 @@ function sendSdp(
     to: string,
     from: string
 ) {
-    socket.emit(type, get(roomName), to, from, JSON.stringify(sdp));
+    throw new Error("Not implemented");
 }
 
 function sendCandidate(candidate: RTCIceCandidate, to: string, from: string) {
-    socket.emit(
-        "candidate",
-        get(roomName),
-        to,
-        from,
-        JSON.stringify(candidate)
-    );
+    throw new Error("Not implemented");
 }
 
 socket.on("connect", () => {});
