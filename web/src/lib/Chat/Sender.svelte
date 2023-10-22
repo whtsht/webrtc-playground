@@ -1,7 +1,6 @@
 <script lang="ts">
     import { chatMessages, roomName, sendMessage, userName } from "../../chat";
     import {
-        joinVideoCall,
         videoCallMembers,
         display as diplayVideoCall,
     } from "../../videoCall";
@@ -20,7 +19,6 @@
                 type: "videoCall",
                 user: $userName,
             });
-            $joinVideoCall = false;
             $diplayVideoCall = true;
             $videoCallMembers = [...$videoCallMembers, $userName];
         }

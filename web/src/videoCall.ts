@@ -5,8 +5,6 @@ import { connects, sendAnswer, sendOffer, setAnswer, setOffer } from "./webrtc";
 
 export const videoCallMembers: Writable<string[]> = writable([]);
 
-export const joinVideoCall = writable(false);
-
 export const localStream: Writable<null | MediaStream> = writable(null);
 
 export const remoteStreams: Writable<Map<string, MediaStream>> = writable(
@@ -51,7 +49,6 @@ export function createNegotiationChannel(peer: RTCPeerConnection) {
                 return;
             }
             videoCallMembers.set(negotiate.members);
-            joinVideoCall.set(true);
             display.set(true);
             return;
         }
