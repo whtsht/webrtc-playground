@@ -4,7 +4,6 @@
     import {
         display,
         localStream,
-        joinVideoCall,
         videoCallMembers,
         remoteStreams,
         startNegotiate,
@@ -37,11 +36,10 @@
             if (video) {
                 video.srcObject = $localStream;
             }
-            if ($joinVideoCall) {
-                for (let i = 0; i < $videoCallMembers.length; i++) {
-                    if ($videoCallMembers[i] === $userName) continue;
-                    await startNegotiate($videoCallMembers[i], $userName);
-                }
+
+            for (let i = 0; i < $videoCallMembers.length; i++) {
+                if ($videoCallMembers[i] === $userName) continue;
+                await startNegotiate($videoCallMembers[i], $userName);
             }
         } else {
             if (video) {
