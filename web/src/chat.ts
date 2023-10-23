@@ -1,6 +1,6 @@
 import { connect } from "socket.io-client";
 import { get, writable, type Writable } from "svelte/store";
-import { connects } from "./webrtc";
+import { connects, sendOffer, sendAnswer, setAnswer, setOffer } from "./webrtc";
 
 export const roomName: Writable<null | string> = writable(null);
 
