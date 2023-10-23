@@ -66,11 +66,11 @@ export function sendMessage(message: ChatMessage) {
     });
 }
 
-function getPeer(to: string) {
+function getPeer(to: string): RTCPeerConnection {
     return connects.get(to)!.chatConnection!;
 }
 
-function newPeerConnection(to: string) {
+function newPeerConnection(to: string): RTCPeerConnection {
     const peer = new RTCPeerConnection();
     peer.onconnectionstatechange = (_) => {
         console.log(`connection state: ${peer.connectionState}`);

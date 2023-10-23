@@ -10,7 +10,7 @@ const io = new SocketIO(httpServer, {
     },
 });
 
-const members: Map<string, string[]> = new Map();
+const membersMap: Map<string, string[]> = new Map();
 
 io.on("connection", (socket) => {
     console.log("user connected");
@@ -40,19 +40,18 @@ io.on("connection", (socket) => {
     );
 
     socket.on("create or join", (room: string) => {
-        const clientsInRoom = io.sockets.adapter.rooms.get(room);
-        const numClients = clientsInRoom ? clientsInRoom.size : 0;
+        const numMembers = membersMap.get(room)?.length ?? 0;
 
-        if (numClients === 0) {
+        if (numMembers === 0) {
             socket.join(room);
             socket.emit("created");
-            members.set(room, [socket.id]);
-        } else if (numClients < 4) {
+            membersMap.set(room, [socket.id]);
+        } else if (numMembers < 4) {
             io.sockets.in(room).emit("join", socket.id);
             socket.join(room);
-            socket.emit("joined", members.get(room));
+            socket.emit("joined", membersMap.get(room));
             io.sockets.in(room).emit("ready");
-            members.set(room, [...members.get(room)!, socket.id]);
+            membersMap.set(room, [...membersMap.get(room)!, socket.id]);
         } else {
             socket.emit("full", room);
         }
