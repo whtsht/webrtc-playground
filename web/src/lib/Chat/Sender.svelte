@@ -6,6 +6,8 @@
     } from "../../videoCall";
     import Send from "svelte-material-icons/Send.svelte";
     import Phone from "svelte-material-icons/Phone.svelte";
+    import Controller from "svelte-material-icons/Controller.svelte";
+    import { display as displayPong } from "../../pong";
 
     let value = "";
 
@@ -21,6 +23,17 @@
             });
             $diplayVideoCall = true;
             $videoCallMembers = [...$videoCallMembers, $userName];
+        }
+    }
+
+    function startGame() {
+        if ($roomName) {
+            chatMessages.update((messages) => [
+                ...messages,
+                { user: $userName, type: "pong" },
+            ]);
+            sendMessage({ type: "pong", user: $userName });
+            $displayPong = true;
         }
     }
 
@@ -50,6 +63,9 @@
     </button>
     <button on:click={startVideoCall}>
         <Phone size="24px" viewBox="0 0 24 20" />
+    </button>
+    <button on:click={startGame}>
+        <Controller size="24px" viewBox="0 0 24 20" />
     </button>
 </div>
 
